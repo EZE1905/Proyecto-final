@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <title>{{ articulo.titulo }}</title>
+{% endblock titulo %}
+
+{% block contenido %}
+    <div>
+        <h1>{{ articulo.titulo }}</h1>
+        <p>{{ articulo.subtitulo }}</p>
+        <p>{{ articulo.cuerpo }}</p>
+        <p>Autor: {{ articulo.autor }}</p>
+        <p>Fecha: {{ articulo.fecha }}</p>
+        <a class="btn btn-primary" href="{% url 'listar_articulos' %}">Ver todos los artículos</a>
+    </div>
+{% endblock contenido %}

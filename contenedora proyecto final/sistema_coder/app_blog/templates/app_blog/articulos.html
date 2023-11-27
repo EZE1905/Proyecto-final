@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    <title>Coderblog-Articulo</title>
+{% endblock titulo %}
+
+{% block contenido %}
+    <div>
+        <h1 style="color:rgb(51, 170, 218);">Bienvenido, estos son los articulos subidos</h1>
+        <br>
+        <div class="actions">
+            <a class="btn btn-primary" href="{% url 'listar_articulos' %}">Ver todos los artículos</a> <a class="btn btn-success" href="{% url 'crear_articulos' %}">Crear artículo</a>
+        </div>
+        <br>
+        <form action="{% url 'buscar_articulos' %}" method="post" class="search-form">
+            {% csrf_token %}
+            
+            <label for="campo_busqueda">Buscar por:</label>
+            <select name="campo_busqueda" id="campo_busqueda">
+                <option value="titulo">Título</option>
+                <option value="autor">Autor</option>
+            </select>
+            
+            <input type="text" name="busqueda" placeholder="Ingrese su búsqueda">
+            
+            <input type="submit" value="Buscar">
+            <input type="reset" value="Limpiar">
+        </form>
+        <br>
+        <h2 style="color:rgb(51, 170, 218);">Articulos:</h2>
+        <br>
+        <br>
+        <ul>
+            {% if Articulos %}
+            <ul>
+                {% for articulo in Articulos %}
+                    <li>
+                        <h3>{{ articulo.titulo }}</h3>
+                        <p>{{ articulo.subtitulo }}</p>
+                        <div class="acciones">   
+                            {% if user == articulo.creador %}     
+                            <form action="{% url 'eliminar_articulo' articulo.id %}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">
+                            {% endif %} 
+                                {% csrf_token %}
+                                <a href="{% url 'detalle_articulo' articulo.id %}" class="btn-link">Leer más</a> <br> {% if user == articulo.creador %} <button type="submit" class="btn-link">Eliminar</button> <a class="btn btn-link" href="{% url 'editar_articulo' articulo.id %}">Editar</a> {% endif %}
+                            </form>
+                        </div>
+                    </li>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color:rgb(230, 52, 20);">No hay artículos disponibles.</p>
+        {% endif %}        
+        </ul>
+    </div>
+{% endblock contenido %}
+

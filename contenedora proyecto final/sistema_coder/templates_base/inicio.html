@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Coderblog</title>
+{% endblock titulo %}
+
+
+{% block contenido %}
+{% if user.is_authenticated %}
+<h1 style="color:rgb(51, 170, 218);">Bienvenido/a {{ user.last_name }}, {{ user.first_name }} al Coderblog</h1>
+<img src="{{ user.avatar.imagen.url }}" style="max-width: 300px;">
+{% else %}
+<h1 style="color:rgb(51, 170, 218);">Bienvenido visitante al Coderblog</h1>
+{% endif %}
+
+{% endblock contenido %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Editar datos</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:rgb(51, 170, 218);">Tu username es <b>{{ object.username }}</b></h1>
+<br>
+<h3>Editar datos:</h3>
+<br>
+<form method="post">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <input type="submit" value="Guardar cambios"/>
+</form>
+{% endblock contenido %}

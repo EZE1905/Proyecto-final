@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Registrarse</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:rgb(51, 170, 218);">Registrarse</h1>
+<br>
+<form method="post">
+ {% csrf_token %}
+ {{ form.as_p }}
+<br>
+ <input type="submit" value="Registrarse" />
+</form>
+{% endblock contenido %}
